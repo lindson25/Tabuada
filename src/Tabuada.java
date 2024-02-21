@@ -1,15 +1,26 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Tabuada {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Digite um número para gerar uma tabuada: ");
-        String number_old = scan.nextLine(); // Solicita ao usuário um número.
-        int new_number = Integer.parseInt(number_old); // Converte o dado de string para inteiro
+        GerarTabuada gerar = new GerarTabuada();
+        System.out.println("Bem-vindo à calculadora de tabuada!");
 
-        //Gera a tabuada do número enviado pelo usuário 
-        for (int i = 1; i <= 10; i++) {
-            System.out.println(new_number + " * " + i + " = " + new_number * i);
+        try {
+            System.out.println("Digite um número inteiro para gerar uma tabuada: ");
+            int number = scan.nextInt(); // Solicita ao usuário um número inteiro para gerar a tabuada
+            
+            // Verifica se o número inserido é diferente de zero antes de gerar a tabuada
+            if (number == 0) {
+                System.out.println("Digite um número válido diferente de zero.");
+            } else {
+                gerar.exibirTabuada(number);
+                System.out.println("Agradecemos por usar a calculadora de tabuada!");
+            }
+        } catch (NumberFormatException | InputMismatchException e) {
+            System.out.println("[ERRO] Digite um número válido!");
+            e.printStackTrace(); // Adiciona informações detalhadas sobre a exceção
         }
         scan.close();
     }
